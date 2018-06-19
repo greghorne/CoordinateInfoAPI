@@ -50,7 +50,7 @@ class CoordinateInfoController < ApplicationController
                         :port     => $db_port,
                         :dbname   => $db_name,
                         :user     => $db_user,
-                        :password => "bogus" #$db_pwd
+                        :password => $db_pwd
                     )
 
                     return conn
@@ -64,16 +64,20 @@ class CoordinateInfoController < ApplicationController
 
     def coord_info
 
+        # retrieve params and create coordinate object
         coordinate = Coordinate.new(params[:long_x], params[:lat_y], params[:key], params[:db])
 
+        # check validity of x,y coordinates
         if !coordinate.valid_xy
             render json: {error: 1, msg: "invalid long_x and/or lat_y", form: "http://website.com/api/v1?long_x=number&lat_y=number?db=pg(or mongo)?key=optional" }, status: 400
         end
        
+        # get db connection
         conn = get_db_conn(coordinate.db)
+
         puts "=========="
-        puts conn.status
         puts conn.close
+        
         render json: {msg: "db connected"}
 
 
