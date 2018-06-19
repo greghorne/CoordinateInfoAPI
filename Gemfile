@@ -13,6 +13,7 @@ gem 'rails', '~> 5.2.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem "thin"
+#gem 'torquebox', '~> 3.1', '>= 3.1.2'
 gem "pg"
 gem 'rest-client'
 gem 'json'
