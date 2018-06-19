@@ -1,19 +1,26 @@
 require 'rest-client'
 require 'json'
 
+$db_host = ENV["RAILS_API_HOST"]
+$db_name = ENV["RAILS_API_DB"]
+$db_port = ENV["RAILS_API_PORT"]
+$db_user = ENV["RAILS_API_USER"]
+$db_pwd  = ENV["RAILS_API_PWD"]
+
 class CoordinateInfoController < ApplicationController
 
     class Coordinate 
-        def initialize(longitude_x, latitude_y, key)
+
+        def initialize(longitude_x, latitude_y, key, db)
             @longitude_x = longitude_x
             @latitude_y  = latitude_y
             @key         = key.to_s 
 
-            puts @longitude_x
-            puts @latitude_y
-            puts @key
+            (db.to_s === "pg" || db.to_s === "mongo") ? @db = db : @db="pg"
         end
 
+        attr_reader :longitude_x, :latitude_y, :key, :db
+            
         private def longitude_valid(value)
             (value >= -180 && value <= 180) ? true : false
         end
@@ -24,11 +31,7 @@ class CoordinateInfoController < ApplicationController
 
         def valid_xy
             ((Float(@longitude_x) rescue false) && (Float(@latitude_y) rescue false)) && 
-                (longitude_valid(Float(@longitude_x)) && latitude_valid(Float(@latitude_y))) ? true : false
-
-            #     return true
-            # end
-            # return false
+             (longitude_valid(Float(@longitude_x)) && latitude_valid(Float(@latitude_y))) ? true : false
         end
 
         def check_key
@@ -37,15 +40,42 @@ class CoordinateInfoController < ApplicationController
 
     end
 
+    def get_db_conn(db_type)
+
+        case db_type
+            when "pg"
+                begin
+                    conn = PG::Connection.open(
+                        :host     => $db_host,
+                        :port     => $db_port,
+                        :dbname   => $db_name,
+                        :user     => $db_user,
+                        :password => "bogus" #$db_pwd
+                    )
+
+                    return conn
+                rescue PG::Error => e
+                    false
+                end
+
+            when "mongo"
+        end
+    end
+
     def coord_info
 
-        coordinate = Coordinate.new(params[:long_x], params[:lat_y], params[:key])
+        coordinate = Coordinate.new(params[:long_x], params[:lat_y], params[:key], params[:db])
 
         if !coordinate.valid_xy
-            render json: {error: 1, msg: "invalid long_x and/or lat_y", form: "http://website.com/api/v1?long_x=number&lat_y=number?key=optional" }, status: 400
+            render json: {error: 1, msg: "invalid long_x and/or lat_y", form: "http://website.com/api/v1?long_x=number&lat_y=number?db=pg(or mongo)?key=optional" }, status: 400
         end
+       
+        conn = get_db_conn(coordinate.db)
+        puts "=========="
+        puts conn.status
+        puts conn.close
+        render json: {msg: "db connected"}
 
-        # render json: { msg: coordinate.valid_xy.to_s }
 
     end
 
