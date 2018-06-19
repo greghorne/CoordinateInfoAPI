@@ -23,12 +23,12 @@ class CoordinateInfoController < ApplicationController
         end
 
         def valid_xy
-            if ((Float(@longitude_x) rescue false) && (Float(@latitude_y) rescue false)) && 
-                (longitude_valid(Float(@longitude_x)) && latitude_valid(Float(@latitude_y)))
+            ((Float(@longitude_x) rescue false) && (Float(@latitude_y) rescue false)) && 
+                (longitude_valid(Float(@longitude_x)) && latitude_valid(Float(@latitude_y))) ? true : false
 
-                return true
-            end
-            return false
+            #     return true
+            # end
+            # return false
         end
 
         def check_key
@@ -39,8 +39,13 @@ class CoordinateInfoController < ApplicationController
 
     def coord_info
 
-        coordinate = Coordinate.new(params[:x], params[:y], params[:key])
-        render json: { msg: coordinate.valid_xy.to_s }
+        coordinate = Coordinate.new(params[:long_x], params[:lat_y], params[:key])
+
+        if !coordinate.valid_xy
+            render json: {error: 1, msg: "invalid long_x and/or lat_y", form: "http://website.com/api/v1?long_x=number&lat_y=number?key=optional" }, status: 400
+        end
+
+        # render json: { msg: coordinate.valid_xy.to_s }
 
     end
 
