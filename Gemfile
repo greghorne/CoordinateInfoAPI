@@ -17,6 +17,7 @@ gem "thin"
 gem "pg"
 gem 'rest-client'
 gem 'json'
+gem 'rack-attack'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

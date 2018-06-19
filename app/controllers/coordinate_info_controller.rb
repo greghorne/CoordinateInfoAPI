@@ -74,10 +74,9 @@ class CoordinateInfoController < ApplicationController
        
         # get db connection
         conn = get_db_conn(coordinate.db)
+        conn.close
+        puts conn
 
-        puts "=========="
-        puts conn.close
-        
         render json: {msg: "db connected"}
 
 
