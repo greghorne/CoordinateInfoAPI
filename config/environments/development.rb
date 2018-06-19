@@ -43,6 +43,10 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  #config.serve_static_assets = false
+  config.reload_classes_only_on_change = false
+
+
 # $env_host = ENV["RAILS_API_HOST"]
 # $env_db   = ENV["RAILS_API_DB"]
 # $env_user = ENV["RAILS_API_USER"]

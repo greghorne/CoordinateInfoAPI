@@ -9,6 +9,7 @@ $db_pwd  = ENV["RAILS_API_PWD"]
 
 class CoordinateInfoController < ApplicationController
 
+    # =========================================
     class Coordinate 
 
         def initialize(longitude_x, latitude_y, key, db)
@@ -39,7 +40,9 @@ class CoordinateInfoController < ApplicationController
         end
 
     end
+    # =========================================
 
+    # =========================================
     def get_db_conn(db_type)
 
         case db_type
@@ -59,12 +62,17 @@ class CoordinateInfoController < ApplicationController
                 end
 
             when "mongo"
+                begin
+                end
+
         end
     end
+    # =========================================
 
+    # =========================================
     def coord_info
 
-        # retrieve params and create coordinate object
+        # pass request params and create coordinate object
         coordinate = Coordinate.new(params[:long_x], params[:lat_y], params[:key], params[:db])
 
         # check validity of x,y coordinates
@@ -75,13 +83,12 @@ class CoordinateInfoController < ApplicationController
         # get db connection
         conn = get_db_conn(coordinate.db)
         conn.close
-        puts conn
-
+puts "HORNEs"
         render json: {msg: "db connected"}
 
 
     end
-
+    # =========================================
 
 
 end
