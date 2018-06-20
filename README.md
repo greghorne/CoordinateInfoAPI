@@ -2,7 +2,7 @@
 
 Scope:
 
-	-	Write a Rails5 API
+	-	Write a Rails 5 API
 	-	Given an x, y coordinate, return municipality information that intersects the coordinates.
 
 
@@ -30,7 +30,24 @@ API Usage:
         long_x = type: float (longitude)
         lat_y  = type: float (latitude)
         db     = type: string ==> pg (default) or mongo (not implemented yet)
-        key    = type: string ==> authorization key (not implemented yet)
+        key    = type: string ==> authorization key     (not implemented yet)
 
+    - Return value is JSON
 
+        country:              country name in English
+        municipality:         municipality name in English
+        municipality_nl:      municipality name in native language
+        municipality_nl_type: municipality type in native language
+
+    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=48.516388
+
+        returns JSON: 
+        {
+            "country": "Yemen",
+            "municipality": "Hadramawt",
+            "municipaltiy_nl": "حضرموت",
+            "municipality_nl_type": "Muhafazah"
+        }
+
+    - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
 
