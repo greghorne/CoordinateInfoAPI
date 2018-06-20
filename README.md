@@ -69,7 +69,7 @@ Examples:
 
 Notes:
 
-    - There are additonal columns to the dataset but I have cut them off at the first four columns.
+    - There are additonal columns in the dataset but I have cut them off at the first four columns.
     - Quoted strings are an inconsistency I have observed in the dataset.
 
 
