@@ -25,7 +25,7 @@ Tech Stack:
 
 API Usage:
 
-    - http://api.website.com/api/v1?long_x=floatr&lat_y=float?db=db_type?key=optional
+    - http://api.website.com/api/v1?long_x=float&lat_y=float&db=db_type&key=optional
 
         long_x = type: float (longitude)
         lat_y  = type: float (latitude)
@@ -70,6 +70,6 @@ Examples:
 Notes:
 
     - There are additonal columns in the dataset but I have cut them off at the first four columns.
-    - Quoted strings are an inconsistency I have observed in the dataset.
+    - Quoted strings are an inconsistency I have observed in the dataset.  See "West Bengal" above.
 
 
