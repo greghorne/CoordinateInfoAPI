@@ -70,6 +70,6 @@ Examples:
 Notes:
 
     - There are additonal columns to the dataset but I have cut them off at the first four columns.
-    - Quoted strings is an inconsistency I have seen in the dataset where most strings are not quoted but there are some that are quoted.  I choose to present the data as is.
+    - Quoted strings are an inconsistency I have observed in the dataset.
 
-    
+
