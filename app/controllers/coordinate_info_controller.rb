@@ -97,22 +97,25 @@ puts "trace"
         puts return_hash
         return return_hash
 
-        
-            # world.name_2,
-            # world.nl_name_2,
-            # world.type_2,
-            # world.engtype_2,
-            # world.name_3,
-            # world.nl_name_3,
-            # world.type_3,
-            # world.engtype_3,
-            # world.name_4,
-            # world.type_4,
-            # world.engtype_4,
-            # world.shape_leng,
-            # world.shape_area
-        
+    end
+    # =========================================
 
+    # =========================================
+    def adjust_respone_data(response)
+
+        # string manipulation of the query response to json
+        response_arr = response[0]["z_world_xy_intersect"].tr('())', '').split(",")
+        response_arr.slice!(5..19)
+        response_arr.shift(1)
+
+        return_json = {
+            :country                => response_arr[0],
+            :municipality           => response_arr[1],
+            :municipaltiy_nl        => response_arr[2],
+            :municipality_nl_type   => response_arr[3]
+        }
+        
+        return return_json
     end
     # =========================================
 
@@ -127,12 +130,19 @@ puts "trace"
             render json: {error: 1, msg: "invalid long_x and/or lat_y", form: "http://website.com/api/v1?long_x=number&lat_y=number?db=pg(or mongo)?key=optional" }, status: 400
         end
        
-        # get db connection
+        # get db connection and execute query-function
         conn = get_db_conn(coordinate.db)
-        response_query = conn.query("select world_xy_intersect_no_geom($1, $2)",[coordinate.longitude_x.to_f, coordinate.latitude_y.to_f])
+        response_query = conn.query("select z_world_xy_intersect($1, $2)",[coordinate.longitude_x.to_f, coordinate.latitude_y.to_f])
         conn.close
 
-        render json: extract_response(response_query)
+        if response_query.num_tuples.to_i === 1
+            puts "trace"
+            return_json = adjust_respone_data(response_query)
+        else
+            return_json = {}
+        end
+
+        render json: return_json
 
         # render json: { municipal_data: response_query[0].to_s }
         
