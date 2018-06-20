@@ -37,11 +37,13 @@ API Usage:
         country:              country name in English
         municipality:         municipality name in English
         municipality_nl:      municipality name in native language
-        municipality_nl_type: municipality type in native language
+        municipality_nl_type: municipality type in native language spelled in English
+
+Examples:
 
     - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=48.516388
 
-        returns JSON: 
+        returns JSON (intersects location in Yemen): 
         {
             "country": "Yemen",
             "municipality": "Hadramawt",
@@ -51,3 +53,5 @@ API Usage:
 
     - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
 
+        returns JSON (intersects location in The Black Sea):
+        \{\}
