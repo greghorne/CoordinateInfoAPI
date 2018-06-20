@@ -54,4 +54,4 @@ Examples:
     - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
 
         returns JSON (intersects location in The Black Sea):
-        \{ \}
+        { }
