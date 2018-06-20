@@ -55,3 +55,21 @@ Examples:
 
         returns JSON (intersects location in The Black Sea):
         { }
+
+    - example http://api.website.com/api/v1/coord_info?lat_y=23.243660&long_x=88.445670
+
+        returns JSON (intersects location in India)
+
+        {
+            "country": "India",
+            "municipality": "\"West Bengal\"",
+            "municipaltiy_nl": "",
+            "municipality_nl_type": "State"
+        }
+
+Notes:
+
+    - There are additonal columns to the dataset but I have cut them off at the first four columns.
+    - Quoted strings is an inconsistency I have seen in the dataset where most strings are not quoted but there are some that are quoted.  I choose to present the data as is.
+
+    
