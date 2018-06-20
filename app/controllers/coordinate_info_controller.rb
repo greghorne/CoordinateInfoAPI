@@ -70,6 +70,53 @@ class CoordinateInfoController < ApplicationController
     # =========================================
 
     # =========================================
+    def extract_response(result)
+
+        # return_hash = {
+        #     :id => result[0]['objectid'],
+        #     :name0 => result[0]['name_0'],
+        #     :name1 => result[0]['world.name_1'],
+        #     :nl_name1 => result[0]['world.nl_name_1'],
+        #     :type_1 => result[0]['world.type_1'],
+        #     :engtype_1 => result[0]['world.engtype_1']
+        # }
+
+puts "trace"
+        # always seem to have to do weird string manipulation
+        arr_split = result[0]["world_xy_intersect_no_geom"].gsub(/[)(]/, '').split(',')
+        puts arr_split
+
+        return_hash = {
+            :id => arr_split[0],
+            :name0 => arr_split[1],
+            :name1 => arr_split[2],
+            :nl_name1 => arr_split[3],
+            :type_1 => arr_split[4],
+            :engtype_1 => arr_split[5]
+        }
+        puts return_hash
+        return return_hash
+
+        
+            # world.name_2,
+            # world.nl_name_2,
+            # world.type_2,
+            # world.engtype_2,
+            # world.name_3,
+            # world.nl_name_3,
+            # world.type_3,
+            # world.engtype_3,
+            # world.name_4,
+            # world.type_4,
+            # world.engtype_4,
+            # world.shape_leng,
+            # world.shape_area
+        
+
+    end
+    # =========================================
+
+    # =========================================
     def coord_info
 
         # pass request params and create coordinate object
@@ -82,9 +129,15 @@ class CoordinateInfoController < ApplicationController
        
         # get db connection
         conn = get_db_conn(coordinate.db)
+        response_query = conn.query("select world_xy_intersect_no_geom($1, $2)",[coordinate.longitude_x.to_f, coordinate.latitude_y.to_f])
         conn.close
-puts "HORNEs"
-        render json: {msg: "db connected"}
+
+        render json: extract_response(response_query)
+
+        # render json: { municipal_data: response_query[0].to_s }
+        
+
+        # render json: {msg: "db connected"}
 
 
     end
