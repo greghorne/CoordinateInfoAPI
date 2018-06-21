@@ -33,14 +33,18 @@ API Usage:
         key    = type: string ==> authorization key     (not implemented yet)
 
     - Return value is JSON
-
-        country:               country name in English
-        municipality1:         municipality name in English
-        municipality_nl1:      municipality name in native language
-        municipality_nl_type1: municipality type in native language spelled in English
-        municipality2:         municipality name in English
-        municipality_nl2:      municipality name in native language
-        municipality_nl_type2: municipality type in native language spelled in English
+        {
+            "success": integer         1 = success, 0 = error (check this value first)
+            "response": {
+                country:               country name in English
+                municipality1:         municipality name in English
+                municipality_nl1:      municipality name in native language
+                municipality_nl_type1: municipality type in native language spelled in English
+                municipality2:         municipality name in English
+                municipality_nl2:      municipality name in native language
+                municipality_nl_type2: municipality type in native language spelled in English
+            }
+        }
 
 Example API Calls:
 
@@ -49,13 +53,16 @@ Example API Calls:
         returns JSON (intersects location in India)
 
         {
-            "country": "India",
-            "municipality1": "West Bengal",
-            "municipaltiy_nl1": "",
-            "municipality_nl_type1": "State",
-            "municipality2": "Nadia",
-            "municipaltiy_nl2": "",
-            "municipality_nl_type2": "District"
+            "success": 1,
+            "response": {
+                "country": "India",
+                "municipality1": "West Bengal",
+                "municipaltiy_nl1": "",
+                "municipality_nl_type1": "State",
+                "municipality2": "Nadia",
+                "municipaltiy_nl2": "",
+                "municipality_nl_type2": "District"
+            }
         }
 
         read as:
@@ -67,13 +74,16 @@ Example API Calls:
         returns JSON (intersects location in India)
 
         {
-            "country": "China",
-            "municipality1": "Beijing",
-            "municipaltiy_nl1": "北京|北京",
-            "municipality_nl_type1": "Zhíxiáshì",
-            "municipality2": "Beijing",
-            "municipaltiy_nl2": "北京",
-            "municipality_nl_type2": "Zhíxiáshì"
+            "success": 1,
+            "response": {
+                "country": "China",
+                "municipality1": "Beijing",
+                "municipaltiy_nl1": "北京|北京",
+                "municipality_nl_type1": "Zhíxiáshì",
+                "municipality2": "Beijing",
+                "municipaltiy_nl2": "北京|北京",
+                "municipality_nl_type2": "Zhíxiáshì"
+            }
         }
 
         read as:
@@ -88,20 +98,34 @@ Example API Calls:
     - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
 
         returns JSON (intersects location in The Black Sea):
-        { }
+        {
+            "success": 1,
+            "response": { }
+        }
 
+
+    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&<span style="color:red">long_x=-200</span>
+
+        returns JSON (invalid long_x):
+        {
+            "success": 0,
+            "response": "invalid long_x and/or lat_y"
+        }
 
     - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=48.516388
 
         returns JSON (intersects location in Yemen): 
         {
-            "country": "Yemen",
-            "municipality1": "Hadramawt",
-            "municipaltiy_nl1": "حضرموت",
-            "municipality_nl_type1": "Muhafazah",
-            "municipality2": "Wadi Al Ayn",
-            "municipaltiy_nl2": "وادي العين وحوره",
-            "municipality_nl_type2": "Muderiah"
+            "success": 1,
+            "response": {
+                "country": "Yemen",
+                "municipality1": "Hadramawt",
+                "municipaltiy_nl1": "حضرموت",
+                "municipality_nl_type1": "Muhafazah",
+                "municipality2": "Wadi Al Ayn",
+                "municipaltiy_nl2": "وادي العين وحوره",
+                "municipality_nl_type2": "Muderiah"
+            }
         }
 
         read as:
