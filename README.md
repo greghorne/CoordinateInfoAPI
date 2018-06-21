@@ -46,6 +46,8 @@ API Usage:
             }
         }
 
+        if success = 0 then "response" will contain a "msg" (see below for example)
+
 Example API Calls:
 
     - example http://api.website.com/api/v1/coord_info?lat_y=23.243660&long_x=88.445670
