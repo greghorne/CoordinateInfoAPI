@@ -2,7 +2,7 @@
 
 Scope:
 
-	-	Write a Rails 5 API
+	-	Create a Rails 5 API
 	-	Given an x, y coordinate, return municipality information that intersects the coordinates.
 
 
@@ -34,27 +34,15 @@ API Usage:
 
     - Return value is JSON
 
-        country:              country name in English
-        municipality:         municipality name in English
-        municipality_nl:      municipality name in native language
-        municipality_nl_type: municipality type in native language spelled in English
+        country:               country name in English
+        municipality1:         municipality name in English
+        municipality_nl1:      municipality name in native language
+        municipality_nl_type1: municipality type in native language spelled in English
+        municipality2:         municipality name in English
+        municipality_nl2:      municipality name in native language
+        municipality_nl_type2: municipality type in native language spelled in English
 
 Examples:
-
-    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=48.516388
-
-        returns JSON (intersects location in Yemen): 
-        {
-            "country": "Yemen",
-            "municipality": "Hadramawt",
-            "municipaltiy_nl": "حضرموت",
-            "municipality_nl_type": "Muhafazah"
-        }
-
-    - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
-
-        returns JSON (intersects location in The Black Sea):
-        { }
 
     - example http://api.website.com/api/v1/coord_info?lat_y=23.243660&long_x=88.445670
 
@@ -62,14 +50,44 @@ Examples:
 
         {
             "country": "India",
-            "municipality": "\"West Bengal\"",
-            "municipaltiy_nl": "",
-            "municipality_nl_type": "State"
+            "municipality1": "\"West Bengal\"",
+            "municipaltiy_nl1": "",
+            "municipality_nl_type1": "State",
+            "municipality2": "Nadia",
+            "municipaltiy_nl2": "",
+            "municipality_nl_type2": "District"
         }
+
+        translated as:
+            (India, West Bengal State, Nadia District)
+
+
+    - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
+
+        returns JSON (intersects location in The Black Sea):
+        { }
+
+
+    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=48.516388
+
+        returns JSON (intersects location in Yemen): 
+        {
+            "country": "Yemen",
+            "municipality1": "Hadramawt",
+            "municipaltiy_nl1": "حضرموت",
+            "municipality_nl_type1": "Muhafazah",
+            "municipality2": "\"Wadi Al Ayn\"",
+            "municipaltiy_nl2": "\"وادي العين وحوره\"",
+            "municipality_nl_type2": "Muderiah"
+        }
+
+        translated as:
+            (Yemen, Hadramawt Muhafazah, Wadi Al Ayn Muderiah) or
+            (Yemen, Hadramawt حضرموت, Wadi Al Ayn وادي العين وحوره)
+
 
 Notes:
 
-    - There are additonal columns in the dataset but I have cut them off at the first four columns.
-    - Quoted strings are an inconsistency I have observed in the dataset.  See "West Bengal" above.
+    - There are additonal columns in the dataset but I have cut them off at the first two interations of a location.
 
 
