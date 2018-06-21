@@ -70,51 +70,23 @@ class CoordinateInfoController < ApplicationController
     # =========================================
 
     # =========================================
-    def extract_response(result)
-
-        # return_hash = {
-        #     :id => result[0]['objectid'],
-        #     :name0 => result[0]['name_0'],
-        #     :name1 => result[0]['world.name_1'],
-        #     :nl_name1 => result[0]['world.nl_name_1'],
-        #     :type_1 => result[0]['world.type_1'],
-        #     :engtype_1 => result[0]['world.engtype_1']
-        # }
-
-puts "trace"
-        # always seem to have to do weird string manipulation
-        arr_split = result[0]["world_xy_intersect_no_geom"].gsub(/[)(]/, '').split(',')
-        puts arr_split
-
-        return_hash = {
-            :id => arr_split[0],
-            :name0 => arr_split[1],
-            :name1 => arr_split[2],
-            :nl_name1 => arr_split[3],
-            :type_1 => arr_split[4],
-            :engtype_1 => arr_split[5]
-        }
-        puts return_hash
-        return return_hash
-
-    end
-    # =========================================
-
-    # =========================================
-    def adjust_respone_data(response)
+    def adjust_response_data(response)
 
         # string manipulation of the query response to json
-        response_arr = response[0]["z_world_xy_intersect"].tr('())', '').split(",")
-        response_arr.slice!(5..19)
-        response_arr.shift(1)
 
+        response_arr = response[0]["z_world_xy_intersect"].tr('())', '').gsub(/[\"]/,"").split(",")
         return_json = {
-            :country                => response_arr[0],
-            :municipality           => response_arr[1],
-            :municipaltiy_nl        => response_arr[2],
-            :municipality_nl_type   => response_arr[3]
+            :country                => response_arr[1],
+
+            :municipality1           => response_arr[2],
+            :municipaltiy_nl1        => response_arr[3],
+            :municipality_nl_type1   => response_arr[4],
+
+            # :country2                => response_arr[5],
+            :municipality2           => response_arr[6],
+            :municipaltiy_nl2        => response_arr[7],
+            :municipality_nl_type2   => response_arr[8]
         }
-        
         return return_json
     end
     # =========================================
@@ -136,19 +108,12 @@ puts "trace"
         conn.close
 
         if response_query.num_tuples.to_i === 1
-            puts "trace"
-            return_json = adjust_respone_data(response_query)
+            return_json = adjust_response_data(response_query)
         else
             return_json = {}
         end
 
         render json: return_json
-
-        # render json: { municipal_data: response_query[0].to_s }
-        
-
-        # render json: {msg: "db connected"}
-
 
     end
     # =========================================
