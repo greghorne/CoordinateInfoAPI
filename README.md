@@ -50,7 +50,7 @@ Examples:
 
         {
             "country": "India",
-            "municipality1": "\"West Bengal\"",
+            "municipality1": "West Bengal",
             "municipaltiy_nl1": "",
             "municipality_nl_type1": "State",
             "municipality2": "Nadia",
@@ -76,8 +76,8 @@ Examples:
             "municipality1": "Hadramawt",
             "municipaltiy_nl1": "حضرموت",
             "municipality_nl_type1": "Muhafazah",
-            "municipality2": "\"Wadi Al Ayn\"",
-            "municipaltiy_nl2": "\"وادي العين وحوره\"",
+            "municipality2": "Wadi Al Ayn",
+            "municipaltiy_nl2": "وادي العين وحوره",
             "municipality_nl_type2": "Muderiah"
         }
 
