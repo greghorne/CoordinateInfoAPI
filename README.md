@@ -58,8 +58,30 @@ Examples:
             "municipality_nl_type2": "District"
         }
 
-        translated as:
+        read as:
             (India, West Bengal State, Nadia District)
+
+
+    - example http://api.website.com/api/v1/coord_info?lat_y=39.904200&long_x=116.407396
+
+        returns JSON (intersects location in India)
+
+        {
+            "country": "China",
+            "municipality1": "Beijing",
+            "municipaltiy_nl1": "北京|北京",
+            "municipality_nl_type1": "Zhíxiáshì",
+            "municipality2": "Beijing",
+            "municipaltiy_nl2": "北京",
+            "municipality_nl_type2": "Zhíxiáshì"
+        }
+
+        read as:
+            (China, Beijing Zhíxiáshì)
+            (China, 北京|北京 Zhíxiáshì)
+
+            In that the data repeats itself only the first set of data is relavent.
+            Also, note dataset error of repeat of 北京 as 北京|北京.  北京 = Beijing
 
 
     - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
@@ -81,7 +103,7 @@ Examples:
             "municipality_nl_type2": "Muderiah"
         }
 
-        translated as:
+        read as:
             (Yemen, Hadramawt Muhafazah, Wadi Al Ayn Muderiah) or
             (Yemen, Hadramawt حضرموت, Wadi Al Ayn وادي العين وحوره)
 
