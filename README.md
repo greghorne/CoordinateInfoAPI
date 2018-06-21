@@ -73,7 +73,7 @@ Example API Calls:
 
     - example http://api.website.com/api/v1/coord_info?lat_y=39.904200&long_x=116.407396
 
-        returns JSON (intersects location in India)
+        returns JSON (intersects location in China)
 
         {
             "success": 1,
