@@ -42,7 +42,7 @@ API Usage:
         municipality_nl2:      municipality name in native language
         municipality_nl_type2: municipality type in native language spelled in English
 
-Examples:
+Example API Calls:
 
     - example http://api.website.com/api/v1/coord_info?lat_y=23.243660&long_x=88.445670
 
