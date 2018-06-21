@@ -71,6 +71,27 @@ Example API Calls:
             (India, West Bengal State, Nadia District)
 
 
+    - example https://api.website.com/api/v1/coord_info?lat_y=36.153980&long_x=-95.992775
+
+        returns JSON (intersects location in Tulsa, OK)
+
+        {
+            "success": 1,
+            "response": {
+                "country": "United States",
+                "municipality1": "Oklahoma",
+                "municipaltiy_nl1": "",
+                "municipality_nl_type1": "State",
+                "municipality2": "Tulsa",
+                "municipaltiy_nl2": "",
+                "municipality_nl_type2": "County"
+            }
+        }
+
+        read as:
+            (United States, Oklahoma State, Tulsa County)
+
+
     - example http://api.website.com/api/v1/coord_info?lat_y=39.904200&long_x=116.407396
 
         returns JSON (intersects location in China)
