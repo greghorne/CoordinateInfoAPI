@@ -113,7 +113,7 @@ class CoordinateInfoController < ApplicationController
                 return_json = {}
             end
 
-            render json: { success: 1, response: return_json }
+            render json: { success: 1, results: return_json }
         end
 
     end
