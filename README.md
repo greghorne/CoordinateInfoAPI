@@ -25,10 +25,10 @@ Tech Stack:
 
 API Usage:
 
-    - http://api.website.com/api/v1?long_x=float&lat_y=float&db=db_type&key=optional
+    - http://api.website.com/api/v1?lat_y=float&long_x=float&db=db_type&key=optional
 
-        long_x = type: float (longitude)
         lat_y  = type: float (latitude)
+        long_x = type: float (longitude)
         db     = type: string ==> pg (default) or mongo (not implemented yet)
         key    = type: string ==> authorization key     (not implemented yet)
 
@@ -104,12 +104,14 @@ Example API Calls:
         }
 
 
-    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&<span style="color:red">long_x=-200</span>
+    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=-200_
 
         returns JSON (invalid long_x):
         {
             "success": 0,
-            "response": "invalid long_x and/or lat_y"
+            "response": {
+                "msg": "invalid long_x and/or lat_y"
+            }
         }
 
     - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=48.516388
