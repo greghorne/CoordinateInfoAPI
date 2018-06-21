@@ -78,10 +78,11 @@ Example API Calls:
 
         read as:
             (China, Beijing Zhíxiáshì)
+                        or
             (China, 北京|北京 Zhíxiáshì)
 
             In that the data repeats itself only the first set of data is relavent.
-            Also, note dataset error of repeat of 北京 as 北京|北京.  北京 = Beijing
+            Also note dataset error of repeat of 北京 as 北京|北京.  北京 = Beijing
 
 
     - example http://api.website.com/api/v1/coord_info?lat_y=43.413029&long_x=34.299316
@@ -104,8 +105,9 @@ Example API Calls:
         }
 
         read as:
-            (Yemen, Hadramawt Muhafazah, Wadi Al Ayn Muderiah) or
-            (Yemen, Hadramawt حضرموت, Wadi Al Ayn وادي العين وحوره)
+            (Yemen, Hadramawt Muhafazah, Wadi Al Ayn Muderiah) 
+                                   or
+            (Yemen, حضرموت Muhafazah, وادي العين وحوره Muderiah)
 
 
 Notes:
