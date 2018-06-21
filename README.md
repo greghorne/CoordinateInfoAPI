@@ -2,8 +2,8 @@
 
 Scope:
 
-	-	Create a Rails 5 API
-	-	Given an x, y coordinate, return municipality information that intersects the coordinates.
+	-	Rails 5 API
+	-	Given an x, y coordinate, return country and municipality information that intersects the coordinates.
 
 
 Data Source:
@@ -29,8 +29,8 @@ API Usage:
 
         lat_y  = type: float (latitude)
         long_x = type: float (longitude)
-        db     = type: string ==> pg (default) or mongo (not implemented yet)
-        key    = type: string ==> authorization key     (not implemented yet)
+        db     = type: string ==> pg (default) or mongo (pending implementation)
+        key    = type: string ==> authorization key     (pending implementation)
 
     - Return value is JSON
         {
@@ -106,7 +106,7 @@ Example API Calls:
         }
 
 
-    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=-200_
+    - example http://api.website.com/api/v1/coord_info?lat_y=15.552727&long_x=-200
 
         returns JSON (invalid long_x):
         {
@@ -140,6 +140,6 @@ Example API Calls:
 
 Notes:
 
-    - There are additonal columns in the dataset but I have cut them off at the first two interations of a location.
+    - There are additonal columns in the dataset but I have cut them off after the first two interations of a location.
 
 
