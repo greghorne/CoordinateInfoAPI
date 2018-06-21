@@ -99,21 +99,22 @@ class CoordinateInfoController < ApplicationController
 
         # check validity of x,y coordinates
         if !coordinate.valid_xy
-            render json: {error: 1, msg: "invalid long_x and/or lat_y", form: "http://website.com/api/v1?long_x=number&lat_y=number?db=pg(or mongo)?key=optional" }, status: 400
-        end
-       
-        # get db connection and execute query-function
-        conn = get_db_conn(coordinate.db)
-        response_query = conn.query("select z_world_xy_intersect($1, $2)",[coordinate.longitude_x.to_f, coordinate.latitude_y.to_f])
-        conn.close
-
-        if response_query.num_tuples.to_i === 1
-            return_json = adjust_response_data(response_query)
+            render json: { success: 0, :response => { msg: "invalid lat_y and/or long_x"} }, status: 400
         else
-            return_json = {}
-        end
+       
+            # get db connection and execute query-function
+            conn = get_db_conn(coordinate.db)
+            response_query = conn.query("select z_world_xy_intersect($1, $2)",[coordinate.longitude_x.to_f, coordinate.latitude_y.to_f])
+            conn.close
 
-        render json: return_json
+            if response_query.num_tuples.to_i === 1
+                return_json = adjust_response_data(response_query)
+            else
+                return_json = {}
+            end
+
+            render json: { success: 1, response: return_json }
+        end
 
     end
     # =========================================
