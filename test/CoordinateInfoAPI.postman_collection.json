@@ -95,7 +95,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0ded7528-c9f8-43ec-a496-9a0a6e5045c7",
+						"id": "3c123f44-7321-4935-93a2-04818630f685",
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData = pm.response.json();",
@@ -104,13 +104,9 @@
 							"    pm.expect(jsonData.success).to.equal(1);",
 							"});",
 							"",
-							"//",
-							"// not sure what the value of an empty json object is",
-							"// if it is empty, it is not evaluated",
-							"//",
-							"// pm.test(\"returns {}\", function() {",
-							"//     pm.expect(jsonData.results).to.equal(nill);",
-							"// });",
+							"pm.test(\"returns {}\", function() {",
+							"    pm.expect(pm.response.results).to.equal(undefined);",
+							"});",
 							"",
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
