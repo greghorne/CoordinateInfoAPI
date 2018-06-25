@@ -21,7 +21,15 @@ class CoordinateInfosController < ApplicationController
             key = params[:key]
             db  = params[:db]
 
-            render json: coord_info_do(params[:long_x], params[:lat_y], key, db)
+            response = coord_info_do(params[:long_x], params[:lat_y], key, db)
+
+            parsed = JSON.parse(response)
+
+            if parsed["success"] 
+                render json: response, status: 400
+            else
+                render json: response, status: 200
+            end
        
         rescue Exception => e 
             return "unknown error: " + e.to_s
