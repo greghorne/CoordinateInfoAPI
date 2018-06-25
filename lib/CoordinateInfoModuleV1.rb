@@ -1,13 +1,13 @@
-require 'rest-client'
-require 'json'
+module CoordinateInfoModuleV1
 
-$db_host = ENV["RAILS_API_HOST"]
-$db_name = ENV["RAILS_API_DB"]
-$db_port = ENV["RAILS_API_PORT"]
-$db_user = ENV["RAILS_API_USER"]
-$db_pwd  = ENV["RAILS_API_PWD"]
+    require 'rest-client'
+    require 'json'
 
-class CoordinateInfoController < ApplicationController
+    $db_host = ENV["RAILS_API_HOST"]
+    $db_name = ENV["RAILS_API_DB"]
+    $db_port = ENV["RAILS_API_PORT"]
+    $db_user = ENV["RAILS_API_USER"]
+    $db_pwd  = ENV["RAILS_API_PWD"]
 
     # =========================================
     class Coordinate 
@@ -32,7 +32,7 @@ class CoordinateInfoController < ApplicationController
 
         def valid_xy
             ((Float(@longitude_x) rescue false) && (Float(@latitude_y) rescue false)) && 
-             (longitude_valid(Float(@longitude_x)) && latitude_valid(Float(@latitude_y))) ? true : false
+                (longitude_valid(Float(@longitude_x)) && latitude_valid(Float(@latitude_y))) ? true : false
         end
 
         def check_key
@@ -101,7 +101,7 @@ class CoordinateInfoController < ApplicationController
         if !coordinate.valid_xy
             render json: { success: 0, :response => { msg: "invalid lat_y and/or long_x"} }, status: 400
         else
-       
+        
             # get db connection and execute query-function
             conn = get_db_conn(coordinate.db)
             response_query = conn.query("select z_world_xy_intersect($1, $2)",[coordinate.longitude_x.to_f, coordinate.latitude_y.to_f])
@@ -117,7 +117,5 @@ class CoordinateInfoController < ApplicationController
         end
 
     end
-    # =========================================
-
-
+    # ================
 end
