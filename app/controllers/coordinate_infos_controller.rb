@@ -23,7 +23,12 @@ class CoordinateInfosController < ApplicationController
             end
        
         rescue Exception => e 
-            return "unknown error: " + e.to_s
+
+            return_hash = { :success => 0,
+                            :results =>  { :msg => e.to_s}
+            }
+
+            render json: return_hash, status: 500
 
         end
 

@@ -98,8 +98,8 @@ module CoordinateInfoModuleV1
 
         # check validity of x,y coordinates
         if !coordinate.valid_xy
-            return_hash = { :success  => 0, 
-                            :response =>  { msg: "invalid lat_y and/or long_x" }
+            return_hash = { :success => 0, 
+                            :results =>  { msg: "invalid lat_y and/or long_x" }
                           }
 
             return JSON.generate(return_hash)
