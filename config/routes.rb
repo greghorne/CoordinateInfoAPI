@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   scope "/api" do
     scope "/v1" do
-      get 'coord_info' => 'coordinate_infos#coord_info'
+      get 'coord_info' => 'coordinate_infos#coord_info_v1'
     end
   end
 
