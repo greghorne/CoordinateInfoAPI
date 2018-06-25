@@ -46,11 +46,4 @@ Rails.application.configure do
   #config.serve_static_assets = false
   config.reload_classes_only_on_change = false
 
-
-# $env_host = ENV["RAILS_API_HOST"]
-# $env_db   = ENV["RAILS_API_DB"]
-# $env_user = ENV["RAILS_API_USER"]
-# $env_pwd  = ENV["RAILS_API_PWD"]
-# $env_port - ENV["RAILS_API_PORT"]
-
 end

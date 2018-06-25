@@ -10,7 +10,7 @@ module CoordinateInfoModuleV1
     $db_pwd  = ENV["RAILS_API_PWD"]
 
     # =========================================
-    class Coordinate 
+    class Coordinate
 
         def initialize(longitude_x, latitude_y, key, db)
             @longitude_x = longitude_x
@@ -76,32 +76,33 @@ module CoordinateInfoModuleV1
 
         response_arr = response[0]["z_world_xy_intersect"].tr('())', '').gsub(/[\"]/,"").split(",")
         return_json = {
-            :country                => response_arr[1],
+            :country               => response_arr[1],
 
-            :municipality1           => response_arr[2],
-            :municipaltiy_nl1        => response_arr[3],
-            :municipality_nl_type1   => response_arr[4],
+            :municipality1         => response_arr[2],
+            :municipaltiy_nl1      => response_arr[3],
+            :municipality_nl_type1 => response_arr[4],
 
-            # :country2                => response_arr[5],
-            :municipality2           => response_arr[6],
-            :municipaltiy_nl2        => response_arr[7],
-            :municipality_nl_type2   => response_arr[8]
+            :municipality2         => response_arr[6],
+            :municipaltiy_nl2      => response_arr[7],
+            :municipality_nl_type2 => response_arr[8]
         }
         return return_json
     end
     # =========================================
 
     # =========================================
-    def coord_info
+    def coord_info_do(long_x, lat_y, key, db)
 
         # pass request params and create coordinate object
-        coordinate = Coordinate.new(params[:long_x], params[:lat_y], params[:key], params[:db])
+        coordinate = Coordinate.new(long_x, lat_y, key, db)
 
         # check validity of x,y coordinates
         if !coordinate.valid_xy
-            render json: { success: 0, :response => { msg: "invalid lat_y and/or long_x"} }, status: 400
+            return JSON.generate({ :success  => 0, 
+                                   :response => { msg: "invalid lat_y and/or long_x"} }, 
+                                   :status   => 400)
         else
-        
+
             # get db connection and execute query-function
             conn = get_db_conn(coordinate.db)
             response_query = conn.query("select z_world_xy_intersect($1, $2)",[coordinate.longitude_x.to_f, coordinate.latitude_y.to_f])
@@ -113,9 +114,14 @@ module CoordinateInfoModuleV1
                 return_json = {}
             end
 
-            render json: { success: 1, results: return_json }
+            return_hash = { :success => 1,
+                            :results => return_json 
+                          }
+
+            return JSON.generate(return_hash)
         end
 
     end
     # ================
+
 end
