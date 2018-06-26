@@ -1,6 +1,6 @@
 require 'rest-client'
 require 'json'
-require 'CoordinateInfoModuleV1'
+# require '#{RAILS_ROOT}/lib/CoordinateInfoModuleV1.rb'
 
 class CoordinateInfosController < ApplicationController
 
@@ -10,7 +10,7 @@ class CoordinateInfosController < ApplicationController
     def coord_info_v1
 
         begin
-        
+
             key = params[:key]
             db  = params[:db]
 

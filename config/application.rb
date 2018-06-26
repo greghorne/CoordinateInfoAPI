@@ -34,7 +34,18 @@ module Code
     config.api_only = true
 
     config.middleware.use Rack::Attack
-    config.autoload_paths += %W(#{config.root}/lib)
+    # config.autoload_paths += %W(#{config.root}/lib)
+
+    module CoordinateInfoModuleV1
+      class Application < Rails::Application
+        config.autoload_paths += %W(#{config.root}/lib) # add this line
+      end
+    end
+
+    # config.eager_load_paths << "#{Rails.root}/lib"
+    # config.paths.add Rails.root.join('lib').to_s, eager_load: true
+
+    # config.eager_load_paths << Rails.root.join('lib')
 
     # Spring.watch "lib/CoordinateInfoModuleV1.rb"
 
