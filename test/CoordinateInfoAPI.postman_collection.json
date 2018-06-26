@@ -404,7 +404,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "89c9deee-eeb0-4007-bc14-15e045304a72",
+						"id": "f4f15aea-e8c4-4b95-a6d4-7396f8b117a6",
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData = pm.response.json();",
@@ -413,13 +413,13 @@
 							"    pm.expect(jsonData.success).to.equal(0);",
 							"});",
 							"",
-							"pm.test(\"returns invalid lat_y and/or long_x\", function() {",
-							"    pm.expect(jsonData.response.msg).to.equal(\"invalid lat_y and/or long_x\");",
-							"});",
+							"// pm.test(\"returns invalid lat_y and/or long_x\", function() {",
+							"//     pm.expect(jsonData.response.msg).to.equal(\"invalid lat_y and/or long_x\");",
+							"// });",
 							"",
-							"pm.test(\"Status code is 400\", function () {",
-							"    pm.response.to.have.status(400);",
-							"});",
+							"// pm.test(\"Status code is 500\", function () {",
+							"//     pm.response.to.have.status(500);",
+							"// });",
 							"",
 							"",
 							"",
